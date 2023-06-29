@@ -1,9 +1,8 @@
 //Participant data array
-//need to connect to database later
+//need to fetch participant info from SQL
 var participants = [
   { name: "Participant1", projectName: "Machine Learning", profile: "Lorem ipsum dolor sit amet..." },
   { name: "Participant2", projectName: "Programming Language Concept", profile: "Lorem ipsum dolor sit amet..." },
-  // Add more participants as needed
 ];
 
 var table = document.getElementById("participantTable");
