@@ -1,3 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDBQfdj656HAikaRUOl_ELs5TNYSuo2ucw",
+  authDomain: "gsu-demo-day.firebaseapp.com",
+  projectId: "gsu-demo-day",
+  storageBucket: "gsu-demo-day.appspot.com",
+  messagingSenderId: "717238736966",
+  appId: "1:717238736966:web:f457f51860874e75271247",
+  measurementId: "G-T82JVFH77P"
+};
+
 //Participant data array
 //need to fetch participant info from SQL
 var participants = [
@@ -37,3 +55,7 @@ function createProfileWindow(profile) {
     profileWindow.document.write("<html><body><h2>Participant Profile</h2><p>" + profile + "</p></body></html>");
   };
 }
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
