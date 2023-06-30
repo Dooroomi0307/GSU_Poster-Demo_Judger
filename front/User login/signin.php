@@ -1,29 +1,36 @@
 <?php
 
-if (isset($_POST['uname']) && isset($_POST['password'])) {
-	function validate($data){
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-	$uname = validate($_POST['uname']);
-	$pass = validate($_POST['password']);
+include("config.php");
+include("FIREBASE.php");
+
+
+
+	$uname = ($_POST['uname']);
+	$pass = ($_POST['password']);
 	
 	if(empty($uname)){
-		header("Location: index.php?error=User Name is required");
-		exit();
+		echo "Email is required";
 	}else if (empty($pass)){
-		header("Location: index.php?error=Password is required");
-		exit();
+		echo "password is required"
 	}else{
-		echo "Valid input";
+		$rdb = new FIREBASE($databaseURL);
+		$retrieve = $rdb->retrieve("/Login","/username", "EQUAL",$uname);
+		$data = json_decode($retrieve, 1);
+		
+		if(count($data == 0)){
+			echo "Username not registered";
+		}else{
+			$id = array_keys($data)[0];
+			if($data[id]['password'] == $password){
+				echo "Login sucess";
+			}else{
+				echo "Login failed";
+			}
+			
+			
 	}
 	
 	
-}else{
-	
-	header("Location: index.php");
-	exit();
 }
+
 ?>
