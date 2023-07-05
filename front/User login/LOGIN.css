@@ -1,101 +1,32 @@
-body{
+<!DOCTYPE html>
+<html>
+  <head>
+   
+    <title>Login</title>
+    <link rel="stylesheet" href="LOGIN.css">
 	
-	background: #FFFFFF;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	
-}
+  </head>
+  <body>
+<header>
+   <h1>GSU DEMO DAY </h1>
+   <img src="gsu.jpg" class= "img">
+</header>
 
-*{
-	font-family: sans-serif;
-	box-sizing: border-box;
-	
-	
-}
-
-form{ 
-width: 600px;
-border: 3px solid #ccc;
-padding: 20px;
-background: #FFFFFF; 
-border-radius: 15px;
-
-}
-input{
-	display: block;
-	border: 4px solid #ccc;
-	width: 95%;
-	padding: 10px;
-	margin: 10px auto;
-	border-radius: 5px;
-}
-
-label{
-	color: #888;
-	font-size: 18px;
-	padding: 10px;
-}
-
-button{
-	background: #555;
-	padding: 10px 15px;
-	color: #fff;
-	border-radius: 5px;
-	margin-right: 10px;
-	float: right;
-	border: none;
-}
-
-button:hover{
-	
-	opacity: .7;
-}
-
-.error{
-	background: #F2DEDE;
-	color: #A94442;
-	padding: 10px;
-	width: 95%;
-	border-radius: 5px;
-	margin: 20px auto;
-	
-
-}
-
-
-header{
-	width: 100vw;
-	height: 17vh;
-	background: #0039A6; 
-	box-sizing: border-box;
-	top: 0;
-	position: absolute;
-	
-	
-	}
-	h1{
-		color: #FFFFFF;
-		margin-left: 20px;
-		margin-bottom: 90px;
-		font-size: 70px;
-		position: absolute;
+    <form action="signin.php" method="post">
+		<h2> LOGIN </h2>
 		
-	}
+		<?php if (isset($_GET['error'])){ ?>
+			<p class="error"> <?php echo $_GET['error']; ?> </p>
+		<?php }	?>
+		<label> User Name</label>
+		<input type="text" name="uname" placeholder="UserName"><br>
+		
+		<label> Password </label>
+		<input type="password" name="password" placeholder="Password"><br>
+		
+		<button type="submit"> Login </button>
+		
+		</form>
 	
-	img.img{
-		width: 180px;
-		border-radius: 50%;
-		float: right;
-		margin-right: 10px;
-	}
-	
-	
-
-h2{
-	
-	text-align: center;
-	
-	
-}
+  </body>
+</html>
