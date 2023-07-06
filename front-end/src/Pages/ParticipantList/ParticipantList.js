@@ -1,6 +1,6 @@
 // Import Firestore database
 import db from "../../firebase";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './ParticipantList.css';
  
 const ParticipantList = () => {

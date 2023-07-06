@@ -1,27 +1,33 @@
-
-
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import ParticipantList from './Pages/ParticipantList/ParticipantList';
+import './elements/App.css'
+import Navbar from "./elements/Navbar"
+import Home from "./pages/Home"
+import Login from "./pages/Login/Login"
+import ParticipantList from "./pages/ParticipantList/ParticipantList"
+import Evaluate from "./pages/Evaluate/Evaluate"
+import Analysis from "./pages/Analysis/Analysis"
+import Vote from "./pages/Vote/Vote"
+import { Route, Routes } from "react-router-dom"
 
 function App() {
-  return (
-    <div className="App">
-    <header className="App-header">
-      
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-  );
+
+  //use capital letter for component name
+  return(
+    <>
+    <Navbar />
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />}/>
+        <Route path="/participantList" element={<ParticipantList />}/>
+        <Route path="/evaluate" element={<Evaluate />}/>
+        <Route path="/analysis" element={<Analysis />}/>
+        <Route path="/vote" element={<Vote />}/>
+      </Routes>
+    </div>
+    </>
+  )
+
+    
 }
 
 export default App;
