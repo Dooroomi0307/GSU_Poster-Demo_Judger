@@ -19,8 +19,8 @@ if ($validForm) {
     while (($line = fgets($file)) !== false) {
         $login = explode(",", $line);
 
-        if (trim($login[1]) === $uname && trim($login[2]) === $pass) {
-            if (trim($login[1]) === "admin") { // Added missing closing double quotes
+        if (trim($login[0]) === $uname && trim($login[1]) === $pass) {
+            if (trim($login[0]) === "admin") { // admin username will be "admin" 
                 $adminpage = true;
                 break;
             }
@@ -34,11 +34,11 @@ if ($validForm) {
 
     if ($loginFound) {
         ob_end_clean();
-        header("Location: https://gsu-demo-day.web.app/");
+        header("Location: https://gsu-demo-day.web.app/");  // when login info is in the users file the url link at the top of the webpage goes to Olivia's list of participants site
         exit();
     } else {
         ob_end_clean();
-        header("Location: LOGIN.php?error=Incorrect Username or Password");
+        header("Location: LOGIN.php?error=Incorrect Username or Password"); // when login info not match/ found in file displaces error on the same page
         exit();
     }
 } else {
