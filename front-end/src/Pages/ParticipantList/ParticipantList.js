@@ -50,12 +50,11 @@ const ParticipantList = () => {
 
 // Define how each display entry will be structured
 const Frame = ({ title, name, lvl, category }) => {
-  console.log(title + " " + name + " " + lvl + " " + category);
+  console.log(title + " " + name + " " + lvl + " " + category+"\n");
   return (
       <center>
-          <div className="ParticipantList">
+          <div className="container">
             <p>Name : {name}</p> 
-
             
             <p>Title : {title}</p>
 
