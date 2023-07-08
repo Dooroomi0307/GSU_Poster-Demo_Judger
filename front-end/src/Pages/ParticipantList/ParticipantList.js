@@ -15,7 +15,7 @@ const ParticipantList = () => {
 
   // Fetch the required data using the get() method
   const Fetchdata = () => {
-      db.collection("participant").get().then((querySnapshot) => {
+      db.collection("participantList").get().then((querySnapshot) => {
 
           // Loop through the data and store
           // it in array to display
@@ -26,7 +26,7 @@ const ParticipantList = () => {
           });
       })
   }
-
+  //Name, Title, Level of Study, Category
   // Display the result on the page
   return (
       <div>
@@ -37,9 +37,10 @@ const ParticipantList = () => {
 
           {
               info.map((data) => (
-                  <Frame course={data.CourseEnrolled}
+                  <Frame title={data.Title}
                       name={data.Name}
-                      age={data.Age} />
+                      lvl={data.Lvl}
+                      category={data.Category} />
               ))
           }
       </div>
@@ -48,19 +49,19 @@ const ParticipantList = () => {
 }
 
 // Define how each display entry will be structured
-const Frame = ({ course, name, age }) => {
-  console.log(course + " " + name + " " + age);
+const Frame = ({ title, name, lvl, category }) => {
+  console.log(title + " " + name + " " + lvl + " " + category);
   return (
       <center>
-          <div className="div">
+          <div className="ParticipantList">
+            <p>Name : {name}</p> 
 
-              <p>NAME : {name}</p>
+            
+            <p>Title : {title}</p>
 
+            <p>Level of Study : {lvl}</p>    
 
-              <p>Age : {age}</p>
-
-
-              <p>Course : {course}</p>
+            <p>Category : {category}</p>
 
           </div>
       </center>
