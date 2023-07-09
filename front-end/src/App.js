@@ -1,11 +1,11 @@
-import './Elements/App.css'
-import Navbar from "./Elements/Navbar"
-import Home from "./Pages/Home"
-import Login from "./Pages/Login/Login"
-import ParticipantList from "./Pages/ParticipantList/ParticipantList"
-import Evaluate from "./Pages/Evaluate/Evaluate"
-import Analysis from "./Pages/Analysis/Analysis"
-import Vote from "./Pages/Vote/Vote"
+import './elements/App.css'
+import Navbar from "./elements/Navbar"
+import Home from "./pages/Home"
+import Login from "./pages/Login/Login"
+import ParticipantList from "./pages/ParticipantList/ParticipantList"
+import Evaluate from "./pages/Evaluate/Evaluate"
+import Analysis from "./pages/Analysis/Analysis"
+import Vote from "./pages/Vote/Vote"
 import { Route, Routes } from "react-router-dom"
 
 function App() {
