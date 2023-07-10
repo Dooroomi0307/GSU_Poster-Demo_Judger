@@ -1,0 +1,205 @@
+<<<<<<< HEAD:test-file/User login/LOGIN.css
+body{
+	
+	background: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	
+}
+
+*{
+	font-family: sans-serif;
+	box-sizing: border-box;
+	
+	
+}
+
+form{ 
+width: 600px;
+border: 3px solid #ccc;
+padding: 20px;
+background: #FFFFFF; 
+border-radius: 15px;
+
+}
+input{
+	display: block;
+	border: 4px solid #ccc;
+	width: 95%;
+	padding: 10px;
+	margin: 10px auto;
+	border-radius: 5px;
+}
+
+label{
+	color: #888;
+	font-size: 18px;
+	padding: 10px;
+}
+
+button{
+	background: #555;
+	padding: 10px 15px;
+	color: #fff;
+	border-radius: 5px;
+	margin-right: 10px;
+	float: right;
+	border: none;
+}
+
+button:hover{
+	
+	opacity: .7;
+}
+
+.error{
+	background: #F2DEDE;
+	color: #A94442;
+	padding: 10px;
+	width: 95%;
+	border-radius: 5px;
+	margin: 20px auto;
+	
+
+}
+
+
+header{
+	width: 100vw;
+	height: 17vh;
+	background: #0039A6; 
+	box-sizing: border-box;
+	top: 0;
+	position: absolute;
+	
+	
+	}
+	h1{
+		color: #FFFFFF;
+		margin-left: 20px;
+		margin-bottom: 90px;
+		font-size: 70px;
+		position: absolute;
+		
+	}
+	
+	img.img{
+		width: 180px;
+		border-radius: 50%;
+		float: right;
+		margin-right: 10px;
+	}
+	
+	
+
+h2{
+	
+	text-align: center;
+	
+	
+}
+=======
+body{
+	
+	background: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	
+}
+
+*{
+	font-family: sans-serif;
+	box-sizing: border-box;
+	
+	
+}
+
+form{ 
+width: 600px;
+border: 3px solid #ccc;
+padding: 20px;
+background: #FFFFFF; 
+border-radius: 15px;
+
+}
+input{
+	display: block;
+	border: 4px solid #ccc;
+	width: 95%;
+	padding: 10px;
+	margin: 10px auto;
+	border-radius: 5px;
+}
+
+label{
+	color: #888;
+	font-size: 18px;
+	padding: 10px;
+}
+
+button{
+	background: #555;
+	padding: 10px 15px;
+	color: #fff;
+	border-radius: 5px;
+	margin-right: 10px;
+	float: right;
+	border: none;
+}
+
+button:hover{
+	
+	opacity: .7;
+}
+
+.error{
+	background: #F2DEDE;
+	color: #A94442;
+	padding: 10px;
+	width: 95%;
+	border-radius: 5px;
+	margin: 20px auto;
+	
+
+}
+
+
+header{
+	width: 100vw;
+	height: 17vh;
+	background: #0039A6; 
+	box-sizing: border-box;
+	top: 0;
+	position: absolute;
+	
+	
+	}
+	h1{
+		color: #FFFFFF;
+		margin-left: 20px;
+		margin-bottom: 90px;
+		font-size: 70px;
+		position: absolute;
+		
+	}
+	
+	img.img{
+		width: 180px;
+		border-radius: 50%;
+		float: right;
+		margin-right: 10px;
+	}
+	
+	
+
+h2{
+	
+	text-align: center;
+	
+	
+}
+>>>>>>> 2f72bae7b81a93f8962d091a46496f0e2e154f4d:front/User login/LOGIN.css
