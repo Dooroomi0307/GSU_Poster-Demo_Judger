@@ -1,70 +1,75 @@
 // Import Firestore database
 import db from "../../firebase";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './ParticipantList.css';
- 
+
 const ParticipantList = () => {
- 
+  // Participant list state
   const [info, setInfo] = useState([]);
 
   // Start the fetch operation as soon as
-  // the page loads
-  window.addEventListener('load', () => {
-      Fetchdata();
-  });
+  // the component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // Fetch the required data using the get() method
-  const Fetchdata = () => {
-      db.collection("participantList").get().then((querySnapshot) => {
+  const fetchData = () => {
+    db.collection("participantList").get().then((querySnapshot) => {
+      const participantData = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        participantData.push(data);
+      });
+      setInfo(participantData);
+    });
+  };
 
-          // Loop through the data and store
-          // it in array to display
-          querySnapshot.forEach(element => {
-              var data = element.data();
-              setInfo(arr => [...arr, data]);
 
-          });
-      })
-  }
-  //Name, Title, Level of Study, Category
-  // Display the result on the page
+  // Render the participant list table view
   return (
-      <div>
-          <center>
-              <h2>Participant List</h2>
-              
-          </center>
-
-          {
-              info.map((data) => (
-                  <Frame title={data.Title}
-                      name={data.Name}
-                      lvl={data.Lvl}
-                      category={data.Category} />
-              ))
-          }
-      </div>
-
-  );
-}
-
-// Define how each display entry will be structured
-const Frame = ({ title, name, lvl, category }) => {
-  console.log(title + " " + name + " " + lvl + " " + category+"\n");
-  return (
+    <div>
       <center>
-          <div className="container">
-            <p>Name : {name}</p> 
-            
-            <p>Title : {title}</p>
-
-            <p>Level of Study : {lvl}</p>    
-
-            <p>Category : {category}</p>
-
-          </div>
+        <h2>Participant List</h2>
       </center>
+      <table className="participant-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Level of Study</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {info.map((data) => (
+            <ParticipantRow
+              key={data.id} 
+              data={data}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
-}
+};
+
+// Define how each row will be structured
+const ParticipantRow = ({ data }) => {
+  const { id, Name, Lvl, Title, Category } = data;
+
+  return (
+    <tr>
+      <td>{Name}</td>
+      <td>{Lvl}</td>
+      <td>{Title}</td>
+      <td>{Category}</td>
+      <td>
+        <button>View</button>
+      </td>
+    </tr>
+  );
+};
 
 export default ParticipantList;
