@@ -3,41 +3,56 @@ import db from '../../firebase.js';
 import './Vote.css';
 
 const Vote = () => {
-  //setter
+  //status
   const [candidates, setCandidates] = useState([]);
-  const [voteCounts, setVoteCounts] = useState({});
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  //fetch Fireabase data
+  //Firebase fetch
   const fetchData = () => {
     db.collection('candidateList')
       .get()
       .then((querySnapshot) => {
-        const candidateData = querySnapshot.docs.map((doc) => doc.data());
+        const candidateData = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { ...data, id: doc.id };
+        });
         setCandidates(candidateData);
-        const voteCountsData = candidateData.reduce((counts, candidate) => {
-          counts[candidate.Name] = candidate.Count;
-          return counts;
-        }, {});
-        setVoteCounts(voteCountsData);
       })
       .catch((error) => {
         console.error('Error fetching candidates:', error);
       });
   };
 
-  //handle change in count based on status of checkbox
-  const handleVoteChange = (selectedCandidate) => {
-    const updatedVoteCounts = { ...voteCounts, [selectedCandidate.Name]: selectedCandidate.Count };
-    setVoteCounts(updatedVoteCounts);
+  const handleVoteChange = (candidateId) => {
+    setSelectedCandidate(candidateId);
   };
 
-  //work in progress, this will be later connected to Firebase
-  const handleSubmitClick = (Count) => {
-    
+  //Retrieve candidate: Count, and increment by 1
+  const handleSubmitClick = () => {
+    if (selectedCandidate) {
+      const selectedCandidateRef = db.collection('candidateList').doc(selectedCandidate);
+      selectedCandidateRef.get()
+        .then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            const currentCount = docSnapshot.data().Count;
+            const updatedCount = currentCount + 1;
+            selectedCandidateRef.update({ Count: updatedCount })
+              .then(() => {
+                console.log('Count updated successfully');
+              })
+              .catch((error) => {
+                console.error('Error updating count:', error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error('Error retrieving candidate:', error);
+        });
+    }
   };
 
   return (
@@ -48,12 +63,13 @@ const Vote = () => {
 
       {candidates.map((candidate) => (
         <Frame
-          key={candidate.Name}
+          key={candidate.id}
           candidate={candidate}
+          selectedCandidate={selectedCandidate}
           handleVoteChange={handleVoteChange}
         />
       ))}
-      
+
       <div className="submit-button-container">
         <button className="submit-button" onClick={handleSubmitClick}>
           Submit
@@ -63,17 +79,9 @@ const Vote = () => {
   );
 };
 
-const Frame = ({ candidate, handleVoteChange }) => {
-  const[isChecked, setIsChecked] = useState(false);
-  const [count, setCount] = useState(candidate.Count);
-  
-  //enabled = 1 (count+1)
-  //disabled = 0
+const Frame = ({ candidate, selectedCandidate, handleVoteChange }) => {
   const handleCheckboxChange = () => {
-    const updatedCount = isChecked ? count - 1 : count + 1;
-    setCount(updatedCount);
-    setIsChecked(!isChecked);
-    handleVoteChange({ ...candidate, Count: updatedCount });
+    handleVoteChange(candidate.id);
   };
 
   return (
@@ -81,10 +89,11 @@ const Frame = ({ candidate, handleVoteChange }) => {
       <div className="container">
         <p>Name: {candidate.Name}</p>
         <p>Title: {candidate.Title}</p>
-        <p>Count: {count}</p>
+        <p>Count: {candidate.Count}</p>
         <label>
           <input
             type="checkbox"
+            checked={candidate.id === selectedCandidate}
             onChange={handleCheckboxChange}
           />
           Vote

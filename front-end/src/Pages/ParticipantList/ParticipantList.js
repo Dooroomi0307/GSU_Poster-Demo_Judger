@@ -1,69 +1,237 @@
 // Import Firestore database
+<<<<<<< HEAD
 import db from "../../firebase.js";
 import { useState } from 'react';
+=======
+import db from "../../firebase";
+import { useParams, useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+>>>>>>> c86f8b5a49a305741007353c8d94febb4f3bab4e
 import './ParticipantList.css';
- 
-const ParticipantList = () => {
- 
-  const [info, setInfo] = useState([]);
+import '../../elements/styles.css';
 
-  // Start the fetch operation as soon as
-  // the page loads
-  window.addEventListener('load', () => {
-      Fetchdata();
-  });
 
-  // Fetch the required data using the get() method
-  const Fetchdata = () => {
-      db.collection("participantList").get().then((querySnapshot) => {
+function ParticipantList() {
+  const [participants, setParticipants] = useState([]);
+  const [selectedParticipant, setSelectedParticipant] = useState('');
+  const [criteriaScores, setCriteriaScores] = useState({});
+  const [totalScore, setTotalScore] = useState(0);
 
-          // Loop through the data and store
-          // it in array to display
-          querySnapshot.forEach(element => {
-              var data = element.data();
-              setInfo(arr => [...arr, data]);
+  useEffect(() => {
+    getParticipants();
+  }, []);
 
-          });
+  const getParticipants = () => {
+    db.collection('participantList')
+      .get()
+      .then((querySnapshot) => {
+        const participantList = [];
+        querySnapshot.forEach((doc) => {
+          const participantData = doc.data();
+          const participantName = participantData.Name;
+          participantList.push(participantName);
+        });
+        setParticipants(participantList);
       })
-  }
-  //Name, Title, Level of Study, Category
-  // Display the result on the page
-  return (
-      <div>
-          <center>
-              <h2>Participant List</h2>
-              
-          </center>
+      .catch((error) => {
+        console.error('Error fetching participants:', error);
+      });
+  };
 
-          {
-              info.map((data) => (
-                  <Frame title={data.Title}
-                      name={data.Name}
-                      lvl={data.Lvl}
-                      category={data.Category} />
-              ))
-          }
+  const openEvaluationModal = (participantName) => {
+    setSelectedParticipant(participantName);
+    setCriteriaScores({});
+    setTotalScore(0);
+  };
+
+  const handleCheckboxChange = (criterion, score) => {
+    setCriteriaScores((prevScores) => ({
+      ...prevScores,
+      [criterion]: score,
+    }));
+  };
+
+  useEffect(() => {
+    let total = 0;
+    Object.values(criteriaScores).forEach((score) => {
+      total += parseInt(score);
+    });
+    setTotalScore(total);
+  }, [criteriaScores]);
+
+  const submitEvaluation = () => {
+    if (selectedParticipant) {
+      db.collection('Analysis')
+        .doc(selectedParticipant)
+        .set({
+          Name: selectedParticipant,
+          Scores: criteriaScores,
+          TotalScore: totalScore,
+        })
+        .then(() => {
+          alert('Evaluation submitted successfully!');
+          setSelectedParticipant('');
+        })
+        .catch((error) => {
+          console.error('Error submitting evaluation:', error);
+          alert('Failed to submit evaluation. Please try again.');
+        });
+    } else {
+      alert('Please select a participant.');
+    }
+  };
+
+  const criteriaOptions = [
+    {
+      criterion: 'Attract',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Content',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Creativity',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Detail',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Graphic',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Language',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Spelling',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Legibility',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Originality',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    {
+      criterion: 'Purpose',
+      scores: [
+        { label: '5 - Perfect', value: '5' },
+        { label: '4 - Good', value: '4' },
+        { label: '3 - Fair', value: '3' },
+        { label: '2 - Poor', value: '2' },
+        { label: '1 - Bad', value: '1' },
+      ],
+    },
+    
+  ];
+
+  return (
+    <div>
+      <h1>Participant Evaluation</h1>
+      <div>
+        {participants.map((participantName) => (
+          <div key={participantName}>
+            <span>{participantName}</span>
+            <button onClick={() => openEvaluationModal(participantName)}>
+              Evaluate
+            </button>
+          </div>
+        ))}
       </div>
 
-  );
-}
+      {selectedParticipant && (
+        <div>
+          <h2>Evaluation</h2>
 
-// Define how each display entry will be structured
-const Frame = ({ title, name, lvl, category }) => {
-  console.log(title + " " + name + " " + lvl + " " + category+"\n");
-  return (
-      <center>
-          <div className="container">
-            <p>Name : {name}</p> 
-            
-            <p>Title : {title}</p>
-
-            <p>Level of Study : {lvl}</p>    
-
-            <p>Category : {category}</p>
-
+          <div>
+            <h3>Criteria:</h3>
+            {criteriaOptions.map(({ criterion, scores }) => (
+              <div key={criterion}>
+                <h4>{criterion}</h4>
+                {scores.map(({ label, value }) => (
+                  <label key={value}>
+                    <input
+                      type="radio"
+                      name={criterion}
+                      value={value}
+                      checked={criteriaScores[criterion] === value}
+                      onChange={() => handleCheckboxChange(criterion, value)}
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            ))}
           </div>
-      </center>
+
+          <div>
+            <h3>Total Score: {totalScore}</h3>
+          </div>
+
+          <button onClick={submitEvaluation}>Submit</button>
+        </div>
+      )}
+    </div>
   );
 }
 
