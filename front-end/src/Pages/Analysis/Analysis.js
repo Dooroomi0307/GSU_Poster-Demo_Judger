@@ -72,6 +72,7 @@ const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, leg
       <center>
           <div className="container">
             <p>Name : {name}</p> 
+            <p>Participant ID: {pID}</p>
             <p>Attractiveness Score: {attract}</p>
             <p>Content Score: {content}</p>    
             <p>Creativity Score: {create}</p>

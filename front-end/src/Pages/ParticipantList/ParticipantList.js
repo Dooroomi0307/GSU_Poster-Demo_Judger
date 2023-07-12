@@ -26,9 +26,11 @@ const ParticipantList = () => {
     });
   };
 
-  const handleEvaluateClick = (participantID) => {
-    navigate('/Evaluate/Evaluate.js${participantID}');
+  
+  const handleEvaluateClick = (id) => {
+    navigate('/evaluate');
   };
+  
 
   // Render the participant list table view
   return (
@@ -64,7 +66,7 @@ const ParticipantList = () => {
 
 // Define how each row will be structured
 const ParticipantRow = ({ data, onEvaluate }) => {
-  const { id, participantID, Name, Lvl, Title, Category } = data;
+  const { participantID, Name, Lvl, Title, Category, id } = data;
 
   return (
     <tr>
@@ -74,7 +76,7 @@ const ParticipantRow = ({ data, onEvaluate }) => {
       <td>{Title}</td>
       <td>{Category}</td>
       <td>
-        <button onClick={() => onEvaluate(participantID)}>Evaluate</button>
+        <button onClick={() => onEvaluate(id)}>Evaluate</button>
       </td>
     </tr>
   );

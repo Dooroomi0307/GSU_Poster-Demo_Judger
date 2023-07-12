@@ -54,9 +54,8 @@ const scoreOptions = [
 ];
 
 function Evaluate() {
-  const { participantID } = useParams();
   const [scores, setScores] = useState({});
-  const [totalScore, setTotalScore] = useState(0);
+  const [total, setTotalScore] = useState(0);
 
   useEffect(() => {
     // Fetch the scores from Firebase
@@ -68,7 +67,7 @@ function Evaluate() {
 
         if (scoresData) {
           setScores(scoresData);
-          setTotalScore(scoresData.totalScore || 0);
+          setTotalScore(scoresData.total || 0);
         }
       } catch (error) {
         console.error('Error fetching scores from Firebase:', error);
@@ -102,6 +101,7 @@ function Evaluate() {
   const saveScores = () => {
     const updatedScores = { ...scores };
 
+    //participantID should be unique ID that passed from Participant List
     db.collection('Analysis')
       .doc('participantId')
       .set(updatedScores)
@@ -114,7 +114,7 @@ function Evaluate() {
 
     db.collection('Analysis')
       .doc('participantId')
-      .update({ totalScore })
+      .update({ total })
       .then(() => {
         console.log('Total score saved to Firebase!');
       })
@@ -152,9 +152,9 @@ function Evaluate() {
         ))}
       </div>
       <div>
-        <h3>Total Score: {totalScore}</h3>
+        <h3>Total Score: {total}</h3>
       </div>
-      <button onClick={saveScores}>Save Scores</button>
+      <button onClick={saveScores}>Submit</button>
     </div>
   );
 }
