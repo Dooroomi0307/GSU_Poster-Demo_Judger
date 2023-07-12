@@ -60,7 +60,7 @@ function ParticipantList() {
         .doc(selectedParticipant)
         .set({
           Name: selectedParticipant,
-          Scores: criteriaScores,
+          ...criteriaScores,
           TotalScore: totalScore,
         })
         .then(() => {

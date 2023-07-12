@@ -46,17 +46,17 @@ const Analysis = () => {
                       */
                       name={data.Name}
                       pID={data.participantID}
-                      attract={data.attractScore}
-                      content={data.contentScore}
-                      create={data.createScore}
-                      detail={data.detailScore}
-                      graphic={data.graphicScore}
-                      lang={data.langScore}
-                      legib={data.legibilityScore}
-                      origin={data.originScore}
-                      purpose={data.purposeScore}
-                      spell={data.spellScore}
-                      total={data.totalScore} />
+                      attract={data.Attract}
+                      content={data.Content}
+                      create={data.Creativity}
+                      detail={data.Detail}
+                      graphic={data.Graphic}
+                      lang={data.Language}
+                      spell={data.Spelling}
+                      legib={data.Legibility}
+                      origin={data.Originality}
+                      purpose={data.Purpose}
+                      total={data.TotalScore} />
               ))
           }
       </div>
@@ -78,10 +78,10 @@ const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, leg
             <p>Details Score: {detail}</p> 
             <p>Graphics Score: {graphic}</p>
             <p>Language Score: {lang}</p>
+            <p>Spelling Score: {spell}</p>
             <p>Legibility Score: {legib}</p>
             <p>Originality Score: {origin}</p>
             <p>Purpose Score: {purpose}</p>
-            <p>Spelling Score: {spell}</p>
             <p>Total Project Score : {total}</p>       
 
           </div>
