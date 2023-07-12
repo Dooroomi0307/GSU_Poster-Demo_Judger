@@ -1,12 +1,13 @@
 // Import Firestore database
 import db from "../../firebase";
+import { useParams, useNavigate} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './ParticipantList.css';
 
 const ParticipantList = () => {
   // Participant list state
   const [info, setInfo] = useState([]);
-
+  const navigate = useNavigate();
   // Start the fetch operation as soon as
   // the component mounts
   useEffect(() => {
@@ -25,6 +26,9 @@ const ParticipantList = () => {
     });
   };
 
+  const handleEvaluateClick = (participantID) => {
+    navigate('/Evaluate/Evaluate.js${participantID}');
+  };
 
   // Render the participant list table view
   return (
@@ -35,6 +39,7 @@ const ParticipantList = () => {
       <table className="participant-table">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Level of Study</th>
             <th>Title</th>
@@ -47,6 +52,7 @@ const ParticipantList = () => {
             <ParticipantRow
               key={data.id} 
               data={data}
+              onEvaluate = {handleEvaluateClick}
             />
           ))}
         </tbody>
@@ -55,18 +61,20 @@ const ParticipantList = () => {
   );
 };
 
+
 // Define how each row will be structured
-const ParticipantRow = ({ data }) => {
-  const { id, Name, Lvl, Title, Category } = data;
+const ParticipantRow = ({ data, onEvaluate }) => {
+  const { id, participantID, Name, Lvl, Title, Category } = data;
 
   return (
     <tr>
+      <td>{participantID}</td>
       <td>{Name}</td>
       <td>{Lvl}</td>
       <td>{Title}</td>
       <td>{Category}</td>
       <td>
-        <button>View</button>
+        <button onClick={() => onEvaluate(participantID)}>Evaluate</button>
       </td>
     </tr>
   );

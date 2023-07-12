@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+/*import logo from './logo.svg';
 import './App.css';
 function App() {
   return (
@@ -43,3 +43,4 @@ function App() {
 
 
 export default App;
+*/

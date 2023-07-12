@@ -46,17 +46,17 @@ const Analysis = () => {
                       */
                       name={data.Name}
                       pID={data.participantID}
-                      attract={data.attractScore}
-                      content={data.contentScore}
-                      create={data.createScore}
-                      detail={data.detailScore}
-                      graphic={data.graphicScore}
-                      lang={data.langScore}
-                      legib={data.legibilityScore}
-                      origin={data.originScore}
-                      purpose={data.purposeScore}
-                      spell={data.spellScore}
-                      total={data.totalScore} />
+                      attract={data.attract}
+                      content={data.content}
+                      create={data.create}
+                      detail={data.detail}
+                      graphic={data.graphic}
+                      lang={data.lang}
+                      legib={data.legibility}
+                      origin={data.origin}
+                      purpose={data.purpose}
+                      spell={data.spell}
+                      total={data.total} />
               ))
           }
       </div>
@@ -88,13 +88,5 @@ const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, leg
       </center>
   );
 }
-
-/*
-  function Analysis(){
-  //Alex
-  //Use case8: Admin view; see analysis of score
-  return <h1>Analysis</h1>
-}
-*/
 
 export default Analysis;
