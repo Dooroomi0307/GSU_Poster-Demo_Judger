@@ -8,7 +8,6 @@ import ParticipantList from "./Pages/ParticipantList/ParticipantList"
 import Evaluate from "./Pages/Evaluate/Evaluate"
 import Analysis from "./Pages/Analysis/Analysis"
 import Vote from "./Pages/Vote/Vote"
-import Evaluation from './Pages/Evaluate/Evaluation';
 import { Route, Routes, Router} from "react-router-dom"
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
   };
 
   const submitEvaluation = (participant, score) => {
-    db.collection('Analysis')
+    db.collection('participantList')
       .doc(participant)
       .set({
         Score: score,
@@ -51,7 +50,6 @@ function App() {
         <Route path="/evaluate" element={<Evaluate />}/>
         <Route path="/analysis" element={<Analysis />}/>
         <Route path="/vote" element={<Vote />}/>
-        <Route exact path="/evaluate/:participantId" component={Evaluation} />
       </Routes>
    
 
