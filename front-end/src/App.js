@@ -1,15 +1,16 @@
+import firebase from 'firebase/app';
 import './elements/App.css'
-import Navbar from "./elements/Navbar"
-import Home from "./pages/Home"
-import Login from "./pages/Login/Login"
-import ParticipantList from "./pages/ParticipantList/ParticipantList"
-import Evaluate from "./pages/Evaluate/Evaluate"
-import Analysis from "./pages/Analysis/Analysis"
-import Vote from "./pages/Vote/Vote"
+import Navbar from "./elements/Navbar.js"
+import Home from "./Pages/Home.js"
+import Login from "./Pages/Login/Login.js"
+import ParticipantList from "./Pages/ParticipantList/ParticipantList.js"
+import Evaluate from "./Pages/Evaluate/Evaluate.js"
+import Analysis from "./Pages/Analysis/Analysis.js"
+import Vote from "./Pages/Vote/Vote.js"
 import { Route, Routes } from "react-router-dom"
 
 function App() {
-
+ 
   //use capital letter for component name
   return(
     <>
