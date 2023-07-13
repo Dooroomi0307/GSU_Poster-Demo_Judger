@@ -3,7 +3,6 @@ import db from '../../firebase';
 import './Vote.css';
 
 const Vote = () => {
-  //status
   const [candidates, setCandidates] = useState([]);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
@@ -13,7 +12,7 @@ const Vote = () => {
 
   //Firebase fetch
   const fetchData = () => {
-    db.collection('candidateList')
+    db.collection('Vote')
       .get()
       .then((querySnapshot) => {
         const candidateData = querySnapshot.docs.map((doc) => {
@@ -31,10 +30,10 @@ const Vote = () => {
     setSelectedCandidate(candidateId);
   };
 
-  //Retrieve candidate: Count, and increment by 1
+  //Handle submit button for voting
   const handleSubmitClick = () => {
     if (selectedCandidate) {
-      const selectedCandidateRef = db.collection('candidateList').doc(selectedCandidate);
+      const selectedCandidateRef = db.collection('Vote').doc(selectedCandidate);
       selectedCandidateRef.get()
         .then((docSnapshot) => {
           if (docSnapshot.exists) {
@@ -42,6 +41,7 @@ const Vote = () => {
             const updatedCount = currentCount + 1;
             selectedCandidateRef.update({ Count: updatedCount })
               .then(() => {
+                alert('Vote has been recorded.')
                 console.log('Count updated successfully');
               })
               .catch((error) => {
@@ -55,6 +55,7 @@ const Vote = () => {
     }
   };
 
+  //Page layout
   return (
     <div>
       <center>
@@ -79,16 +80,21 @@ const Vote = () => {
   );
 };
 
+//Vote page main content
 const Frame = ({ candidate, selectedCandidate, handleVoteChange }) => {
   const handleCheckboxChange = () => {
     handleVoteChange(candidate.id);
   };
 
+//Vote page layout
   return (
     <center>
       <div className="container">
+        <p>ParticipantID: {candidate.ParticipantID}</p>
         <p>Name: {candidate.Name}</p>
+        <p>Level of Study: {candidate.Lvl}</p>
         <p>Title: {candidate.Title}</p>
+        <p>Category: {candidate.Category}</p>
         <p>Count: {candidate.Count}</p>
         <label>
           <input

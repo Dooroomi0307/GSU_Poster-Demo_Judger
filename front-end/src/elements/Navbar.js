@@ -8,7 +8,6 @@ function Navbar(){
     <ul>
       <CustomLink href="/login">Login</CustomLink>
       <CustomLink href="/participantList">Participant List</CustomLink>
-      <CustomLink href="/evaluate">Evaluate</CustomLink>
       <CustomLink href="/Analysis">Analysis</CustomLink>
       <CustomLink href="/vote">Vote</CustomLink>
     </ul>

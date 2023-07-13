@@ -1,51 +1,37 @@
-// Import Firestore database
 import db from "../../firebase";
 import { useState } from 'react';
 import './Analysis.css';
  
 const Analysis = () => {
- 
   const [info, setInfo] = useState([]);
-
-  // Start the fetch operation as soon as
-  // the page loads
+  
+  //Page load
   window.addEventListener('load', () => {
       Fetchdata();
   });
 
-  // Fetch the required data using the get() method
+  // Fetch Firebase
   const Fetchdata = () => {
       db.collection("Analysis").get().then((querySnapshot) => {
-
-          // Loop through the data and store
-          // it in array to display
           querySnapshot.forEach(element => {
-              var data = element.data();
-              setInfo(arr => [...arr, data]);
+            var data = element.data();
+            setInfo(arr => [...arr, data]);
 
           });
       })
   }
-  //Name, Title, Level of Study, Category
-  // Display the result on the page
+ 
+  //Analysis page data mapping
   return (
       <div>
           <center>
               <h2>Analysis</h2>
-              
           </center>
-
           {
               info.map((data) => (
                   <Frame 
-                      /*
-                      title={data.Title}
                       name={data.Name}
-                      lvl={data.Lvl}
-                      category={data.Category}
-                      */
-                      name={data.Name}
-                      pID={data.participantID}
+                      pID={data.ParticipantID}
                       attract={data.Attract}
                       content={data.Content}
                       create={data.Creativity}
@@ -60,11 +46,10 @@ const Analysis = () => {
               ))
           }
       </div>
-
   );
 }
 
-// Define how each display entry will be structured
+//Analysis page layout
 const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, legib, origin, purpose, spell, total }) => {
   console.log(name + " " + pID + " " + attract + " " + content + " " + create + " " + detail + " " + graphic + " " + lang + " " + legib + " " 
                         + origin + " " + purpose + " "+ spell + " " + total + "\n");
@@ -88,13 +73,5 @@ const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, leg
       </center>
   );
 }
-
-/*
-  function Analysis(){
-  //Alex
-  //Use case8: Admin view; see analysis of score
-  return <h1>Analysis</h1>
-}
-*/
 
 export default Analysis;

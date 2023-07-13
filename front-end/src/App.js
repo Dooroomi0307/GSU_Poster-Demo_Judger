@@ -2,7 +2,6 @@
 
 import firebase from 'firebase/app';
 import './elements/App.css'
-
 import Navbar from "./elements/Navbar.js"
 import Home from "./Pages/Home.js"
 import Login from "./Pages/Login/Login.jsx"
@@ -24,7 +23,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />}/>
         <Route path="/participantList" element={<ParticipantList />}/>
-        <Route path="/evaluate" element={<Evaluate />}/>
         <Route path="/analysis" element={<Analysis />}/>
         <Route path="/vote" element={<Vote />}/>
       </Routes>

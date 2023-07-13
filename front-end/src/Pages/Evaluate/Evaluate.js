@@ -1,6 +1,6 @@
+//Evaluate page is currently combined with Participant List page
 function Evaluate(){
-  //Michael
-  //Use case 3: Judge score casting w/ rubric
+
   return <h1>Evaluate</h1>
 }
 
