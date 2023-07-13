@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import db from '../../firebase';
 import './ParticipantList.css';
-import '../../elements/styles.css';
 
 function ParticipantList() {
   const [participants, setParticipants] = useState([]);
@@ -44,6 +43,7 @@ function ParticipantList() {
   };
 
   //Evaluation modal
+  //pass participantName to store the evaluation score
   const openEvaluationModal = (participantName) => {
     setSelectedParticipant(participantName);
     setCriteriaScores({});
@@ -58,6 +58,7 @@ function ParticipantList() {
     }));
   };
 
+  //Store score for each criteria & sum up total score
   useEffect(() => {
     let total = 0;
     Object.values(criteriaScores).forEach((score) => {
@@ -68,11 +69,15 @@ function ParticipantList() {
 
   //Store evaluation into 'Analysis' collection
   const submitEvaluation = () => {
+    //retrieve selected participant's participant ID
+    const participant = participants.find((participant) => participant.participantName === selectedParticipant);
+    const participantID = participant ? participant.participantID : '';
     if (selectedParticipant) {
       db.collection('Analysis')
         .doc()
         .set({
           Name: selectedParticipant,
+          ParticipantID: participantID,
           ...criteriaScores,
           TotalScore: totalScore,
         })

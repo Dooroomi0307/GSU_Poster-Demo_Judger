@@ -1,5 +1,11 @@
+.container {
+  display: block;
+  margin-bottom: 20px;
+}
+/*Participan List Style*/
 .participant-container {
   width: 100%;
+  flex-direction: Column;
 }
 
 .participant-table {
@@ -7,6 +13,7 @@
   border-collapse: collapse;
 }
 
+/*Content in table*/
 .participant-table th,
 .participant-table td {
   padding: 10px;
@@ -14,10 +21,12 @@
   border-bottom: 1px solid #ddd;
 }
 
+/*Table label*/
 .participant-table th {
   background-color: #b6bad1;
 }
 
+/*Evaluate button*/
 .participant-table button {
   padding: 5px 10px;
   background-color: #3d58d1;
@@ -30,6 +39,3 @@
   background-color: #2b409b;
 }
 
-.container {
-  margin-bottom: 20px;
-}

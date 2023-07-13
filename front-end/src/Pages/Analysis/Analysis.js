@@ -1,77 +1,100 @@
 import db from "../../firebase";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Analysis.css';
- 
+
 const Analysis = () => {
   const [info, setInfo] = useState([]);
-  
-  //Page load
-  window.addEventListener('load', () => {
-      Fetchdata();
-  });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // Fetch Firebase
-  const Fetchdata = () => {
-      db.collection("Analysis").get().then((querySnapshot) => {
-          querySnapshot.forEach(element => {
-            var data = element.data();
-            setInfo(arr => [...arr, data]);
-
-          });
+  const fetchData = () => {
+    db.collection("Analysis")
+      .get()
+      .then((querySnapshot) => {
+        const analysisData = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          analysisData.push(data);
+        });
+        setInfo(analysisData);
       })
-  }
- 
+      .catch((error) => {
+        console.error('Error fetching analysis data:', error);
+      });
+  };
+
   //Analysis page data mapping
   return (
-      <div>
-          <center>
-              <h2>Analysis</h2>
-          </center>
-          {
-              info.map((data) => (
-                  <Frame 
-                      name={data.Name}
-                      pID={data.ParticipantID}
-                      attract={data.Attract}
-                      content={data.Content}
-                      create={data.Creativity}
-                      detail={data.Detail}
-                      graphic={data.Graphic}
-                      lang={data.Language}
-                      spell={data.Spelling}
-                      legib={data.Legibility}
-                      origin={data.Originality}
-                      purpose={data.Purpose}
-                      total={data.TotalScore} />
-              ))
-          }
-      </div>
-  );
-}
-
-//Analysis page layout
-const Frame = ({ name, pID, attract, content, create, detail, graphic, lang, legib, origin, purpose, spell, total }) => {
-  console.log(name + " " + pID + " " + attract + " " + content + " " + create + " " + detail + " " + graphic + " " + lang + " " + legib + " " 
-                        + origin + " " + purpose + " "+ spell + " " + total + "\n");
-  return (
+    <div>
       <center>
-          <div className="container">
-            <p>Name : {name}</p> 
-            <p>Attractiveness Score: {attract}</p>
-            <p>Content Score: {content}</p>    
-            <p>Creativity Score: {create}</p>
-            <p>Details Score: {detail}</p> 
-            <p>Graphics Score: {graphic}</p>
-            <p>Language Score: {lang}</p>
-            <p>Spelling Score: {spell}</p>
-            <p>Legibility Score: {legib}</p>
-            <p>Originality Score: {origin}</p>
-            <p>Purpose Score: {purpose}</p>
-            <p>Total Project Score : {total}</p>       
-
-          </div>
+        <h2>Analysis</h2>
       </center>
+      <table className="analysis-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ParticipantID</th>
+            <th>Attractiveness</th>
+            <th>Content</th>
+            <th>Creativity</th>
+            <th>Details</th>
+            <th>Graphics</th>
+            <th>Language</th>
+            <th>Spelling</th>
+            <th>Legibility</th>
+            <th>Originality</th>
+            <th>Purpose</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {info.map((data, index) => (
+            <TableRow key={index} data={data} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
-}
+};
+
+//Analysis table row
+const TableRow = ({ data }) => {
+  const {
+    Name,
+    ParticipantID,
+    Attract,
+    Content,
+    Creativity,
+    Detail,
+    Graphic,
+    Language,
+    Spelling,
+    Legibility,
+    Originality,
+    Purpose,
+    TotalScore,
+  } = data;
+
+  return (
+    <tr>
+      <td>{Name}</td>
+      <td>{ParticipantID}</td>
+      <td>{Attract}</td>
+      <td>{Content}</td>
+      <td>{Creativity}</td>
+      <td>{Detail}</td>
+      <td>{Graphic}</td>
+      <td>{Language}</td>
+      <td>{Spelling}</td>
+      <td>{Legibility}</td>
+      <td>{Originality}</td>
+      <td>{Purpose}</td>
+      <td>{TotalScore}</td>
+    </tr>
+  );
+};
 
 export default Analysis;
