@@ -26,13 +26,13 @@ const LoginForm = () => {
   const redirectToPage = (userType) => {
     switch (userType) {
       case "admin":
-        window.location.href = "/Analysis";
+        window.location.href = "/participantlist";
         break;
       case "judge":
-        window.location.href = "/participantList";
+        window.location.href = "/partlist";
         break;
       case "participant":
-        window.location.href = "/participantList";
+        window.location.href = "";
         break;
       default:
         setErrorMessage("Invalid user type.");
@@ -41,30 +41,39 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="cover">
-      <h1>Login</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <div class="all">
+    <div class="body">
+      <header >
+        <h1 class="h1"> GSU   DEMO   DAY</h1>
+      </header>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <div class="form">
+        <h2 class="h2">LOGIN</h2>
+        
+        <label class="label"> Username</label>
+        <input class="input"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+       <label class="label"> Password </label>
+        <input class="input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <div className="login-btn" onClick={handleLogin}>
-        Login
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        <div className="login-btn" onClick={handleLogin}>
+          Login
+        </div>
       </div>
+    </div>
     </div>
   );
 };
 
 export default LoginForm;
-
-

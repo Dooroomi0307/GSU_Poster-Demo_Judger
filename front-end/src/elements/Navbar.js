@@ -3,10 +3,9 @@ function Navbar(){
   return <nav className="nav">
   
     <ul>
-      <CustomLink href="/">Login</CustomLink>
-      <CustomLink href="/participantList">Participant List</CustomLink>
-      <CustomLink href="/Analysis">Analysis</CustomLink>
+      <CustomLink href="/partlist">Participant List</CustomLink>
       <CustomLink href="/vote">Vote</CustomLink>
+      
     </ul>
   </nav>
 }

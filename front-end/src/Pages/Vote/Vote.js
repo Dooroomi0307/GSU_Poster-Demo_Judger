@@ -58,9 +58,9 @@ const Vote = () => {
   //Page layout
   return (
     <div>
-      <center>
+   <center>
         <h2>Candidate List</h2>
-      </center>
+        </center>
 
       {candidates.map((candidate) => (
         <Frame

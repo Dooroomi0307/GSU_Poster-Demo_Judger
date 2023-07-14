@@ -5,7 +5,7 @@ import db from '../../firebase';
 import './ParticipantList.css';
 import './ParticipantRegi.css';
 
-function ParticipantList() {
+function PartList() {
   const [participants, setParticipants] = useState([]);
   const [selectedParticipant, setSelectedParticipant] = useState('');
   const [criteriaScores, setCriteriaScores] = useState({});
@@ -231,9 +231,7 @@ function ParticipantList() {
         </tbody>
       </table>
 
-      <div>
-        <button onClick={openAddParticipantWindow}>Add Participant</button>
-      </div>
+      
       {selectedParticipant && (
         <div>
           <h2>Evaluation</h2>
@@ -268,92 +266,5 @@ function ParticipantList() {
   );
 }
 
+export default PartList;
 
-//Add participant pop-up window
-const openAddParticipantWindow = () => {
-  const addParticipantWindow = window.open('', '_blank', 'width=500,height=500');
-  addParticipantWindow.document.title = 'Add Participant';
-
-  ReactDOM.render(<AddParticipantForm onClose={addParticipantWindow.close} />, addParticipantWindow.document.body);
-};
-
-//Add participant content
-function AddParticipantForm({ onClose }) {
-  const [newParticipant, setNewParticipant] = useState({
-    participantID: '',
-    name: '',
-    levelOfStudy: 'Undergraduate',
-    projectTitle: '',
-    category: 'Demo',
-  });
-
-  //Add participant input handle
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewParticipant((prevParticipant) => ({
-      ...prevParticipant,
-      [name]: value,
-    }));
-  };
-
-  //Store new participant's info into 'ParticipantList' collection
-  const addParticipant = () => {
-    const { participantID, name, levelOfStudy, projectTitle, category } = newParticipant;
-    if (participantID.trim() !== '' && name.trim() !== '' && levelOfStudy.trim() !== '' && projectTitle.trim() !== '' && category.trim() !== '') {
-      db.collection('ParticipantList')
-        .doc()
-        .set({
-          Name: name,
-          ParticipantID: participantID,
-          Lvl: levelOfStudy,
-          Title: projectTitle,
-          Category: category,
-        })
-        .then(() => {
-          alert('Participant information has been saved.');
-          onClose(); 
-        })
-        .catch((error) => {
-          console.error('Error adding participant:', error);
-          alert('Failed to add participant. Please try again.');
-        });
-    } else {
-      alert('Please fill in all the fields.');
-    }
-  };
-
-  //Add participant layout
-  //Temporarily combined with ParticipantRegi.css 
-  return (
-    <div>
-      <h2>Participant Registration</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Participant ID:</label>
-        <input type="text" name="participantID" value={newParticipant.participantID} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
-  
-        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Name:</label>
-        <input type="text" name="name" value={newParticipant.name} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
-  
-        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Level of Study:</label>
-        <select name="levelOfStudy" value={newParticipant.levelOfStudy} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }}>
-          <option value="Undergraduate">Undergraduate</option>
-          <option value="Masters or Pre-qualifier Doctoral Student">Masters or Pre-qualifier Doctoral Student</option>
-          <option value="Doctoral Student - Post-qualifier">Doctoral Student - Post-qualifier</option>
-        </select>
-  
-        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Project Title:</label>
-        <input type="text" name="projectTitle" value={newParticipant.projectTitle} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
-  
-        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Category:</label>
-        <select name="category" value={newParticipant.category} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }}>
-          <option value="Demo">Demo</option>
-          <option value="Poster">Poster</option>
-        </select>
-  
-        <button onClick={addParticipant} style={{ padding: '0.5rem 1rem' }}>Save</button>
-      </div>
-    </div>
-  );
-}
-
-export default ParticipantList;
