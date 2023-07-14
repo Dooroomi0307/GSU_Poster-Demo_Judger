@@ -1,12 +1,9 @@
 function Navbar(){
   const path = window.location.pathname;
   return <nav className="nav">
-  <a 
-  href="/" className="site-title">
-  GSU DEMO DAY
-  </a>
+  
     <ul>
-      <CustomLink href="/login">Login</CustomLink>
+      <CustomLink href="/">Login</CustomLink>
       <CustomLink href="/participantList">Participant List</CustomLink>
       <CustomLink href="/Analysis">Analysis</CustomLink>
       <CustomLink href="/vote">Vote</CustomLink>

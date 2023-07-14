@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import db from '../../firebase';
 import './ParticipantList.css';
+import './ParticipantRegi.css';
 
 function ParticipantList() {
   const [participants, setParticipants] = useState([]);
@@ -322,33 +323,34 @@ function AddParticipantForm({ onClose }) {
   };
 
   //Add participant layout
+  //Temporarily combined with ParticipantRegi.css 
   return (
     <div>
       <h2>Participant Registration</h2>
-      <div className="participant-form">
-        <label>Participant ID:</label>
-        <input type="text" name="participantID" value={newParticipant.participantID} onChange={handleInputChange} />
-
-        <label>Name:</label>
-        <input type="text" name="name" value={newParticipant.name} onChange={handleInputChange} />
-
-        <label>Level of Study:</label>
-        <select name="levelOfStudy" value={newParticipant.levelOfStudy} onChange={handleInputChange}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Participant ID:</label>
+        <input type="text" name="participantID" value={newParticipant.participantID} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
+  
+        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Name:</label>
+        <input type="text" name="name" value={newParticipant.name} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
+  
+        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Level of Study:</label>
+        <select name="levelOfStudy" value={newParticipant.levelOfStudy} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }}>
           <option value="Undergraduate">Undergraduate</option>
           <option value="Masters or Pre-qualifier Doctoral Student">Masters or Pre-qualifier Doctoral Student</option>
           <option value="Doctoral Student - Post-qualifier">Doctoral Student - Post-qualifier</option>
         </select>
-
-        <label>Project Title:</label>
-        <input type="text" name="projectTitle" value={newParticipant.projectTitle} onChange={handleInputChange} />
-
-        <label>Category:</label>
-        <select name="category" value={newParticipant.category} onChange={handleInputChange}>
+  
+        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Project Title:</label>
+        <input type="text" name="projectTitle" value={newParticipant.projectTitle} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }} />
+  
+        <label style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Category:</label>
+        <select name="category" value={newParticipant.category} onChange={handleInputChange} style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%', boxSizing: 'border-box' }}>
           <option value="Demo">Demo</option>
           <option value="Poster">Poster</option>
         </select>
-
-        <button onClick={addParticipant}>Save</button>
+  
+        <button onClick={addParticipant} style={{ padding: '0.5rem 1rem' }}>Save</button>
       </div>
     </div>
   );
