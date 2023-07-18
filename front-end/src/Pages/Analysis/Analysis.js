@@ -47,6 +47,7 @@ const Analysis = () => {
           Count: 0
         })
         .then(() => {
+          alert('Candidate information have been submitted.')
           console.log('Participant saved as a candidate');
         })
         .catch((error) => {

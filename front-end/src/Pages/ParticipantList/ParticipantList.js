@@ -8,7 +8,7 @@ import './ParticipantRegi.css';
 //Participant List Admin Side
 function ParticipantList() {
   const [participants, setParticipants] = useState([]);
-  
+  const [searchTerm, setSearchTerm] = useState('');
   useEffect(() => {
     getParticipants();
   }, []);
@@ -41,12 +41,29 @@ function ParticipantList() {
       });
   };
 
+   //Search Participant by ParticiapantID
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredParticipants = participants.filter((participant) => {
+    return participant.participantID.includes(searchTerm);
+  });
 
 
   //Participant list  & Evaluation modal 
   return (
     <div>
       <h1>Participant Evaluation</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by Participant ID"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </div>
 
       <table className="participant-table">
         <thead>
@@ -60,16 +77,16 @@ function ParticipantList() {
           </tr>
         </thead>
         <tbody>
-          {participants.map((participant) => (
+          {filteredParticipants.map((participant) => (
             <tr key={participant.participantID}>
               <td>{participant.participantID}</td>
               <td>{participant.participantName}</td>
               <td>{participant.levelOfStudy}</td>
               <td>{participant.projectTitle}</td>
               <td>{participant.category}</td>
-             
             </tr>
           ))}
+          
         </tbody>
       </table>
 

@@ -5,19 +5,17 @@ import db from '../../firebase';
 import './ParticipantList.css';
 import './ParticipantRegi.css';
 
-
-//Participant List Judge Side
 function PartList() {
   const [participants, setParticipants] = useState([]);
   const [selectedParticipant, setSelectedParticipant] = useState('');
   const [criteriaScores, setCriteriaScores] = useState({});
   const [totalScore, setTotalScore] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     getParticipants();
   }, []);
 
-  //Firebase fetch
   const getParticipants = () => {
     db.collection('ParticipantList')
       .get()
@@ -45,15 +43,12 @@ function PartList() {
       });
   };
 
-  //Evaluation modal
-  //pass participantName to store the evaluation score
   const openEvaluationModal = (participantName) => {
     setSelectedParticipant(participantName);
     setCriteriaScores({});
     setTotalScore(0);
   };
 
-  //Checkbox handle for each score
   const handleCheckboxChange = (criterion, score) => {
     setCriteriaScores((prevScores) => ({
       ...prevScores,
@@ -61,7 +56,6 @@ function PartList() {
     }));
   };
 
-  //Store score for each criteria & sum up total score
   useEffect(() => {
     let total = 0;
     Object.values(criteriaScores).forEach((score) => {
@@ -70,17 +64,16 @@ function PartList() {
     setTotalScore(total);
   }, [criteriaScores]);
 
-  //Store evaluation into 'Analysis' collection
   const submitEvaluation = () => {
-    //retrieve selected participant's participant ID
-    const participant = participants.find((participant) => participant.participantName === selectedParticipant);
+    const participant = participants.find(
+      (participant) => participant.participantName === selectedParticipant
+    );
     const participantID = participant ? participant.participantID : '';
-    const projectTitle = participant ? participant.projectTitle: '';
-    const projectCategory = participant ? participant.category: '';
-    
-    // Check if all checkboxes are clicked
+    const projectTitle = participant ? participant.projectTitle : '';
+    const projectCategory = participant ? participant.category : '';
+
     const allCriteriaClicked = Object.keys(criteriaScores).length === criteriaOptions.length;
-    
+
     if (selectedParticipant) {
       if (allCriteriaClicked) {
         db.collection('Analysis')
@@ -108,6 +101,15 @@ function PartList() {
       alert('Please select a participant.');
     }
   };
+
+  //Search Participant by ParticiapantID
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredParticipants = participants.filter((participant) => {
+    return participant.participantID.includes(searchTerm);
+  });
   //Criteria label
   const criteriaOptions = [
     {
@@ -212,10 +214,18 @@ function PartList() {
     }
   ];
 
-  //Participant list  & Evaluation modal 
   return (
     <div>
       <h1>Participant Evaluation</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by Participant ID"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </div>
 
       <table className="participant-table">
         <thead>
@@ -229,7 +239,7 @@ function PartList() {
           </tr>
         </thead>
         <tbody>
-          {participants.map((participant) => (
+          {filteredParticipants.map((participant) => (
             <tr key={participant.participantID}>
               <td>{participant.participantID}</td>
               <td>{participant.participantName}</td>
@@ -237,14 +247,15 @@ function PartList() {
               <td>{participant.projectTitle}</td>
               <td>{participant.category}</td>
               <td>
-                <button onClick={() => openEvaluationModal(participant.participantName)}>Evaluate</button>
+                <button onClick={() => openEvaluationModal(participant.participantName)}>
+                  Evaluate
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      
       {selectedParticipant && (
         <div>
           <h2>Evaluation</h2>
@@ -280,4 +291,3 @@ function PartList() {
 }
 
 export default PartList;
-
