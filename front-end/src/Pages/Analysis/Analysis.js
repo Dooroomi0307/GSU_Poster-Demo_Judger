@@ -19,14 +19,43 @@ const Analysis = () => {
           const data = doc.data();
           analysisData.push(data);
         });
-        setInfo(analysisData);
+        const sortedData = analysisData.sort((a, b) => b.TotalScore - a.TotalScore); // Sort by TotalScore in descending order
+        setInfo(sortedData);
       })
       .catch((error) => {
         console.error('Error fetching analysis data:', error);
       });
   };
 
-  //Analysis page data mapping
+  // Handle checkbox selection
+  const handleCheckboxChange = (index) => {
+    const updatedInfo = [...info];
+    updatedInfo[index].isSelected = !updatedInfo[index].isSelected;
+    setInfo(updatedInfo);
+  };
+
+  // Save selected participants as candidates in 'Vote' collection
+  const saveCandidates = () => {
+    const selectedParticipants = info.filter((data) => data.isSelected);
+    selectedParticipants.forEach((participant) => {
+      db.collection("Vote")
+        .add({
+          Name: participant.Name,
+          ParticipantID: participant.ParticipantID,
+          ProjectTitle: participant.ProjectTitle,
+          ProjectCategory: participant.ProjectCategory,
+          Count: 0
+        })
+        .then(() => {
+          console.log('Participant saved as a candidate');
+        })
+        .catch((error) => {
+          console.error('Error saving participant as a candidate:', error);
+        });
+    });
+  };
+
+  // Analysis page data mapping
   return (
     <div>
       <center>
@@ -35,12 +64,14 @@ const Analysis = () => {
       <table className="analysis-table">
         <thead>
           <tr>
+            <th>Select</th>
             <th>Name</th>
             <th>ParticipantID</th>
+            <th>Project Title</th>
             <th>Attractiveness</th>
             <th>Content</th>
             <th>Creativity</th>
-            <th>Details</th>
+            <th>Detail</th>
             <th>Graphics</th>
             <th>Language</th>
             <th>Spelling</th>
@@ -52,19 +83,29 @@ const Analysis = () => {
         </thead>
         <tbody>
           {info.map((data, index) => (
-            <TableRow key={index} data={data} />
+            <TableRow
+              key={index}
+              data={data}
+              index={index}
+              handleCheckboxChange={handleCheckboxChange}
+            />
           ))}
         </tbody>
       </table>
+      <div>
+        <button onClick={saveCandidates}>Set as Candidate</button>
+      </div>
     </div>
   );
 };
 
-//Analysis table row
-const TableRow = ({ data }) => {
+// Analysis table row
+const TableRow = ({ data, index, handleCheckboxChange }) => {
   const {
     Name,
     ParticipantID,
+    ProjectTitle,
+    ProjectCategory,
     Attract,
     Content,
     Creativity,
@@ -76,12 +117,22 @@ const TableRow = ({ data }) => {
     Originality,
     Purpose,
     TotalScore,
+    isSelected,
   } = data;
 
   return (
     <tr>
+      <td>
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={() => handleCheckboxChange(index)}
+        />
+      </td>
       <td>{Name}</td>
       <td>{ParticipantID}</td>
+      <td>{ProjectTitle}</td>
+      <td>{ProjectCategory}</td>
       <td>{Attract}</td>
       <td>{Content}</td>
       <td>{Creativity}</td>

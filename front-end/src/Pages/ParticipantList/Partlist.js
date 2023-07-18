@@ -5,6 +5,8 @@ import db from '../../firebase';
 import './ParticipantList.css';
 import './ParticipantRegi.css';
 
+
+//Participant List Judge Side
 function PartList() {
   const [participants, setParticipants] = useState([]);
   const [selectedParticipant, setSelectedParticipant] = useState('');
@@ -73,28 +75,39 @@ function PartList() {
     //retrieve selected participant's participant ID
     const participant = participants.find((participant) => participant.participantName === selectedParticipant);
     const participantID = participant ? participant.participantID : '';
+    const projectTitle = participant ? participant.projectTitle: '';
+    const projectCategory = participant ? participant.category: '';
+    
+    // Check if all checkboxes are clicked
+    const allCriteriaClicked = Object.keys(criteriaScores).length === criteriaOptions.length;
+    
     if (selectedParticipant) {
-      db.collection('Analysis')
-        .doc()
-        .set({
-          Name: selectedParticipant,
-          ParticipantID: participantID,
-          ...criteriaScores,
-          TotalScore: totalScore,
-        })
-        .then(() => {
-          alert('Evaluation has been submitted.');
-          setSelectedParticipant('');
-        })
-        .catch((error) => {
-          console.error('Error submitting evaluation:', error);
-          alert('Failed to submit evaluation. Please try again.');
-        });
+      if (allCriteriaClicked) {
+        db.collection('Analysis')
+          .doc()
+          .set({
+            Name: selectedParticipant,
+            ParticipantID: participantID,
+            ProjectTitle: projectTitle,
+            ProjectCategory: projectCategory,
+            ...criteriaScores,
+            TotalScore: totalScore,
+          })
+          .then(() => {
+            alert('Evaluation has been submitted.');
+            setSelectedParticipant('');
+          })
+          .catch((error) => {
+            console.error('Error submitting evaluation:', error);
+            alert('Failed to submit evaluation. Please try again.');
+          });
+      } else {
+        alert('Please click all the checkboxes for evaluation.');
+      }
     } else {
       alert('Please select a participant.');
     }
   };
-
   //Criteria label
   const criteriaOptions = [
     {

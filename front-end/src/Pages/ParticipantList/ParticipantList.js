@@ -5,10 +5,10 @@ import db from '../../firebase';
 import './ParticipantList.css';
 import './ParticipantRegi.css';
 
+//Participant List Admin Side
 function ParticipantList() {
   const [participants, setParticipants] = useState([]);
   
-
   useEffect(() => {
     getParticipants();
   }, []);
@@ -41,11 +41,7 @@ function ParticipantList() {
       });
   };
 
-  
 
-  
-
-  
 
   //Participant list  & Evaluation modal 
   return (

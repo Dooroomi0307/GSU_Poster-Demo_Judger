@@ -92,9 +92,8 @@ const Frame = ({ candidate, selectedCandidate, handleVoteChange }) => {
       <div className="container">
         <p>ParticipantID: {candidate.ParticipantID}</p>
         <p>Name: {candidate.Name}</p>
-        <p>Level of Study: {candidate.Lvl}</p>
-        <p>Title: {candidate.Title}</p>
-        <p>Category: {candidate.Category}</p>
+        <p>Title: {candidate.ProjectTitle}</p>
+        <p>Category: {candidate.ProjectCategory}</p>
         <p>Count: {candidate.Count}</p>
         <label>
           <input
