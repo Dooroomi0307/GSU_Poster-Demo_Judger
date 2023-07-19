@@ -1,5 +1,12 @@
+import React, { useState } from "react";
+
 function Navbar(){
   const path = window.location.pathname;
+  const handleLogout = () => {
+
+    window.location.href = "/";
+  };
+
   return <nav className="nav">
   
     <ul>
@@ -7,6 +14,9 @@ function Navbar(){
       <CustomLink href="/vote">Vote</CustomLink>
       
     </ul>
+    
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        
   </nav>
 }
 
