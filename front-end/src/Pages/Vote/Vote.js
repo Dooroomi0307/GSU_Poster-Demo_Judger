@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import db from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 import './Vote.css';
 
 const Vote = () => {
   const [candidates, setCandidates] = useState([]);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  //Firebase fetch
+  // Firebase fetch
   const fetchData = () => {
     db.collection('Vote')
       .get()
@@ -30,19 +32,22 @@ const Vote = () => {
     setSelectedCandidate(candidateId);
   };
 
-  //Handle submit button for voting
+  // Handle submit button for voting
   const handleSubmitClick = () => {
     if (selectedCandidate) {
       const selectedCandidateRef = db.collection('Vote').doc(selectedCandidate);
-      selectedCandidateRef.get()
+      selectedCandidateRef
+        .get()
         .then((docSnapshot) => {
           if (docSnapshot.exists) {
             const currentCount = docSnapshot.data().Count;
             const updatedCount = currentCount + 1;
-            selectedCandidateRef.update({ Count: updatedCount })
+            selectedCandidateRef
+              .update({ Count: updatedCount })
               .then(() => {
-                alert('Vote has been recorded.')
+                alert('Vote has been recorded.');
                 console.log('Count updated successfully');
+                navigate('../participantlist'); // Navigate to the ./participantlist page
               })
               .catch((error) => {
                 console.error('Error updating count:', error);
@@ -55,12 +60,12 @@ const Vote = () => {
     }
   };
 
-  //Page layout
+  // Vote page main content
   return (
     <div>
-   <center>
+      <center>
         <h2>Candidate List</h2>
-        </center>
+      </center>
 
       {candidates.map((candidate) => (
         <Frame
@@ -80,13 +85,12 @@ const Vote = () => {
   );
 };
 
-//Vote page main content
+// Vote page layout
 const Frame = ({ candidate, selectedCandidate, handleVoteChange }) => {
   const handleCheckboxChange = () => {
     handleVoteChange(candidate.id);
   };
 
-//Vote page layout
   return (
     <center>
       <div className="container">

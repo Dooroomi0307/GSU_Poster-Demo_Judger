@@ -1,22 +1,30 @@
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: start;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  li {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
+  margin-bottom: 20px;
+  margin-left: auto 0;
+  justify-content: center;
+}
+
+.analysis-table { 
+  margin: auto;
+  margin-left: 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/*Content in table*/
+.analysis-table th,
+.analysis-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/*Table label*/
+.analysis-table th {
+  text-align: center;
+  background-color: #b6bad1;
+}
+
+.analysis-table tbody{
+  align-items: flex-start;
+}

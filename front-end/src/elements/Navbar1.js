@@ -12,6 +12,7 @@ function Navbar1(){
       <ul>
         <CustomLink href="/participantlist">Participant List</CustomLink>
         <CustomLink href="/analysis">Analysis</CustomLink>
+        <CustomLink href="/candidatelist">Candidate List</CustomLink>
         <CustomLink href="/adminpanel">Admin Panel</CustomLink>
         
       </ul>

@@ -1,0 +1,27 @@
+.container {
+  display: block;
+  margin-bottom: 20px;
+}
+/*Candidate List Style*/
+.candidate-container {
+  width: 100%;
+  flex-direction: Column;
+}
+
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/*Content in table*/
+.candidate-table th,
+.candidate-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/*Table label*/
+.candidate-table th {
+  background-color: #b6bad1;
+}
