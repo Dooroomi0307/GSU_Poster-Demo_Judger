@@ -36,7 +36,7 @@ const MyComponent = () => {
   return (
     <div>
       {/* Render your component's content */}
-      <h1>Voting in session!</h1>
+      <h1 >Voting in session!</h1>
       <Vote />
     </div>
   );

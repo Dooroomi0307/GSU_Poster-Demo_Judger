@@ -52,3 +52,6 @@ nav li:hover{
   background-color: #1356d1;
 }
 
+.logout-button:hover{
+  background-color: #b7b4b4;
+}
