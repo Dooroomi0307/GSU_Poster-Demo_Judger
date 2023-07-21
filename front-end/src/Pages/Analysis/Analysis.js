@@ -58,10 +58,11 @@ const Analysis = () => {
 
   // Analysis page data mapping
   return (
-    <div>
+    <div className="container">
       <center>
         <h2>Analysis</h2>
       </center>
+      <div className="table-container">
       <table className="analysis-table">
         <thead>
           <tr>
@@ -69,6 +70,7 @@ const Analysis = () => {
             <th>Name</th>
             <th>ParticipantID</th>
             <th>Project Title</th>
+            <th>Category</th>
             <th>Attractiveness</th>
             <th>Content</th>
             <th>Creativity</th>
@@ -82,6 +84,7 @@ const Analysis = () => {
             <th>Total</th>
           </tr>
         </thead>
+        
         <tbody>
           {info.map((data, index) => (
             <TableRow
@@ -93,6 +96,7 @@ const Analysis = () => {
           ))}
         </tbody>
       </table>
+      </div>
       <div>
         <button onClick={saveCandidates}>Set as Candidate</button>
       </div>
