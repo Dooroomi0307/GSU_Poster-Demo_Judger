@@ -12,12 +12,14 @@ import MyComponent from "./Pages/Vote/Prevote.js"
 import PartList from "./Pages/ParticipantList/Partlist.js"
 import AdminPanel from "./Pages/Admin/AdminPanel.js"
 import CandidateList from "./Pages/Candidate/Candidate.js"
+import Winner from "./Pages/Winner/Winner.js"
+import PL from "./Pages/ParticipantList/pl.js"
 
 import { Route, Routes } from "react-router-dom"
 
 function App() {
   
-  const n1 = ['/vote', '/partlist'];
+  const n1 = ['/vote', '/partlist','/winner'];
   const n2 = ['/analysis', '/participantlist', '/candidatelist','/adminpanel']
   const shouldDisplayNavbar = n1.includes(window.location.pathname);
 
@@ -38,6 +40,8 @@ function App() {
         <Route path="/candidatelist" element={<CandidateList />}/>
         <Route path="/partlist" element={<PartList />}/>
         <Route path="/adminpanel" element={<AdminPanel />}/>
+        <Route path="/winner" element={<Winner />}/>
+        <Route path="/pl" element={<PL />}/>
       </Routes>
     </div>
     </>

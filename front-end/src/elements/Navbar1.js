@@ -16,7 +16,7 @@ function Navbar1(){
         <CustomLink href="/adminpanel">Admin Panel</CustomLink>
         
       </ul>
-      <button className="logout-button" onClick={handleLogout}>Logout</button>
+      <button class="logout-button" onClick={handleLogout}>Logout</button>
     </nav>
   }
   

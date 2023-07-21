@@ -12,10 +12,11 @@ function Navbar(){
     <ul>
       <CustomLink href="/partlist">Participant List</CustomLink>
       <CustomLink href="/vote">Vote</CustomLink>
+      <CustomLink href="/winner">Winner Announcer</CustomLink>
       
     </ul>
     
-          <button className="logout-button" onClick={handleLogout}>Logout</button>
+          <button class="logout-button" onClick={handleLogout}>Logout</button>
         
   </nav>
 }

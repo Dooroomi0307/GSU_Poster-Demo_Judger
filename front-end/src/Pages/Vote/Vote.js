@@ -47,7 +47,7 @@ const Vote = () => {
               .then(() => {
                 alert('Vote has been recorded.');
                 console.log('Count updated successfully');
-                navigate('../participantlist'); // Navigate to the ./participantlist page
+                navigate('../pl'); // Navigate to the ./participantlist page
               })
               .catch((error) => {
                 console.error('Error updating count:', error);
