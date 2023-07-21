@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import './elements/App.css'
 import Navbar from "./elements/Navbar.js"
 import Navbar1 from "./elements/Navbar1.js"
 import Home from "./Pages/Home.js"

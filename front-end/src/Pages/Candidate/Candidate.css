@@ -23,5 +23,18 @@
 
 /*Table label*/
 .candidate-table th {
-  background-color: #b6bad1;
+  background-color: #a8b1d8;
+}
+
+.delete-button{
+  background-color: #6675b1;
+  color: #fff;
+  border: none;
+  padding: 7.5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover{
+  background-color: #5a679c;
 }

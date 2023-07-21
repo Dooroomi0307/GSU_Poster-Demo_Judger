@@ -73,7 +73,6 @@ function ParticipantList() {
             <th>Level of Study</th>
             <th>Project Title</th>
             <th>Category</th>
-            
           </tr>
         </thead>
         <tbody>
@@ -90,8 +89,8 @@ function ParticipantList() {
         </tbody>
       </table>
 
-      <div>
-        <button onClick={openAddParticipantWindow}>Add Participant</button>
+      <div className="buttton-container">
+        <button className="add-button" onClick={openAddParticipantWindow}>Add Participant</button>
       </div>
      
     </div>

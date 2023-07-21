@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import db from "../../firebase";
-import { useState, useEffect } from 'react';
 import './Analysis.css';
 
 const Analysis = () => {
@@ -47,7 +47,7 @@ const Analysis = () => {
           Count: 0
         })
         .then(() => {
-          alert('Candidate information have been submitted.')
+          alert('Candidate information has been submitted.')
           console.log('Participant saved as a candidate');
         })
         .catch((error) => {
@@ -56,55 +56,59 @@ const Analysis = () => {
     });
   };
 
-  // Analysis page data mapping
   return (
-    <div className="container">
+    <div>
       <center>
         <h2>Analysis</h2>
       </center>
       <div className="table-container">
-      <table className="analysis-table">
-        <thead>
-          <tr>
-            <th>Select</th>
-            <th>Name</th>
-            <th>ParticipantID</th>
-            <th>Project Title</th>
-            <th>Category</th>
-            <th>Attractiveness</th>
-            <th>Content</th>
-            <th>Creativity</th>
-            <th>Detail</th>
-            <th>Graphics</th>
-            <th>Language</th>
-            <th>Spelling</th>
-            <th>Legibility</th>
-            <th>Originality</th>
-            <th>Purpose</th>
-            <th>Total</th>
-          </tr>
-        </thead>
         
-        <tbody>
-          {info.map((data, index) => (
-            <TableRow
-              key={index}
-              data={data}
-              index={index}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-          ))}
-        </tbody>
-      </table>
+        <table className="analysis-table">
+          
+          <thead>
+            <tr>
+              <th>Select</th>
+              <th>Name</th>
+              <th>ParticipantID</th>
+              <th>Project Title</th>
+              <th>Category</th>
+              <th>Attractiveness</th>
+              <th>Content</th>
+              <th>Creativity</th>
+              <th>Detail</th>
+              <th>Graphics</th>
+              <th>Language</th>
+              <th>Spelling</th>
+              <th>Legibility</th>
+              <th>Originality</th>
+              <th>Purpose</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            {info.map((data, index) => (
+              <TableRow
+                key={index}
+                data={data}
+                index={index}
+                handleCheckboxChange={handleCheckboxChange}
+              />
+            ))}
+          </tbody>
+            <div className="button-container">
+              <button className="set-button" onClick={saveCandidates}>Set as Candidate</button>
+            </div>   
+        </table>
       </div>
-      <div>
-        <button onClick={saveCandidates}>Set as Candidate</button>
-      </div>
+
+      
+
+           
     </div>
   );
 };
 
-// Analysis table row
 const TableRow = ({ data, index, handleCheckboxChange }) => {
   const {
     Name,
@@ -150,6 +154,8 @@ const TableRow = ({ data, index, handleCheckboxChange }) => {
       <td>{Purpose}</td>
       <td>{TotalScore}</td>
     </tr>
+
+    
   );
 };
 

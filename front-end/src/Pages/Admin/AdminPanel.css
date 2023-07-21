@@ -1,12 +1,12 @@
 .al {
     margin: 0;
     padding: 0;
-    border: 2px solid #333;
+    border: 1px solid #d8d8d8;
     width:auto;
     border-block-start: 200px;
     box-sizing: border-box;
     font-family: 'Poppins';
-    margin-top: -97px;
+    margin-top: 50px;
 
    
   }
@@ -24,7 +24,7 @@
     margin-top: 77px;
     align-items: center;
     justify-content: center;
-    background-color:#b6bad1;
+    background-color:#a8b1d8;
   }
   .h{
     color: black;
@@ -45,9 +45,13 @@
     border: none;
     border-radius: 50px;
     color: #00a037;
-    
+  }
 
- }
+  .but:hover{
+    background-color:#d1d1d1;
+  }
+
+ 
  .stop{
     font-size: 27px;
     font-weight: 500;
@@ -61,10 +65,15 @@
     color: #ed0000;
     
  }
+
+ .stop:hover{
+  background-color:#d1d1d1;
+}
+
  .p{
    
     font-family: 'Tahoma';
-    color: powderblue;
+    color: rgb(143, 143, 143);
   position: fixed;
   align-content: center;
   justify-content: center;

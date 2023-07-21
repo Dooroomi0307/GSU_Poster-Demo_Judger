@@ -1,22 +1,23 @@
-/* Analysis.css */
-
-/* Center the heading */
 h2 {
   text-align: center;
+  font-size: 30px;
 }
 
-/* Style the table */
+/* Style the table container */
 .table-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
   margin: 20px auto;
-  width: 90%;
+  position: relative;
+  
 }
 
 .analysis-table {
-
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  border: 1px solid #ccc;
+  
 }
 
 .analysis-table th,
@@ -26,7 +27,7 @@ h2 {
 }
 
 .analysis-table th {
-  background-color: #f2f2f2;
+  background-color: #a8b1d8;
 }
 
 /* Style checkboxes */
@@ -38,32 +39,25 @@ input[type="checkbox"] {
   vertical-align: middle;
 }
 
-/* Style the "Set as Candidate" button */
-button {
-  display: block;
+.button-container {
+  display: flex;
+  align-items: flex-start;
   margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
+  width: 90%;
+  position: relative;
+}
+
+.set-button {
+  background-color: #6675b1;
   color: #fff;
   border: none;
+  padding: 7.5px 10px;
   border-radius: 4px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-button:hover {
-  background-color: #0056b3;
+.set-button:hover {
+  background-color: #5a679c;
 }
 
-button:focus {
-  outline: none;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Highlight selected rows */
-tr.selected {
-  background-color: #f0f0f0;
-}

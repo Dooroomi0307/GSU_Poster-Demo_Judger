@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import users from "./database.js";
 import "./LoginForm.css";
+import Logo from "../../elements/logo.png"
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -43,13 +44,13 @@ const LoginForm = () => {
   return (
     <div class="all">
     <div class="body">
-      <header >
+      <header>
+        <img src={Logo} alt="Logo" class="logo" />
         <h1 class="h1"> GSU   DEMO   DAY</h1>
       </header>
 
       <div class="form">
         <h2 class="h2">LOGIN</h2>
-        
         <label class="label"> Username</label>
         <input class="input"
           type="text"

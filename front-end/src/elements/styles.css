@@ -5,6 +5,7 @@
 
 body{
   margin: 0;
+  
 }
 
 .container{
@@ -12,15 +13,16 @@ body{
   text-align: center;
 }
 
+/*navigation body*/
 .nav {
-  background-color: #0D409F;
+  background-color: #0256B2;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
   padding: 0 1rem;
-  gap: 2rem;
+  height: 60px;
 }
 
 .site-title{
@@ -33,6 +35,7 @@ body{
   list-style: none;
   display: flex;
   gap: 1rem;
+
 }
 
 .nav a{
@@ -45,13 +48,34 @@ body{
 }
 
 .nav li.active{
-  background-color: #0a2d70;
+  background-color: #004792;
+  height: 100%;
 }
 
 nav li:hover{
-  background-color: #1356d1;
+  background-color: #005ec2;
+  height: 100%;
 }
 
+
+.logout-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.logout-button {
+  background-color: #004794;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  
+}
+  
+
+
 .logout-button:hover{
-  background-color: #b7b4b4;
+  background-color: #003e81;
 }

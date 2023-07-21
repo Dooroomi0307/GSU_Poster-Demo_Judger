@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css";
 
 function Navbar(){
   const path = window.location.pathname;
@@ -15,9 +16,9 @@ function Navbar(){
       <CustomLink href="/winner">Winner Announcer</CustomLink>
       
     </ul>
-    
-          <button class="logout-button" onClick={handleLogout}>Logout</button>
-        
+    <div className="logout-container">
+      <button class="logout-button" onClick={handleLogout}>Logout</button>
+    </div>    
   </nav>
 }
 

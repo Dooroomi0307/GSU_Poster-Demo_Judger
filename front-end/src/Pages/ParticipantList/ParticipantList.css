@@ -2,15 +2,18 @@
   display: block;
   margin-bottom: 20px;
 }
+
 /*Participan List Style*/
 .participant-container {
   width: 100%;
   flex-direction: Column;
+ 
 }
 
 .participant-table {
   width: 100%;
   border-collapse: collapse;
+
 }
 
 /*Content in table*/
@@ -23,19 +26,43 @@
 
 /*Table label*/
 .participant-table th {
-  background-color: #b6bad1;
+  background-color: #a8b1d8;
 }
 
 /*Evaluate button*/
 .participant-table button {
   padding: 5px 10px;
-  background-color: #3d58d1;
+  background-color: #6675b1;
   color: white;
   border: none;
   cursor: pointer;
+  display: flex;
+  margin-top: 10px;
+  justify-content: left;
 }
 
-.participant-table button:hover {
-  background-color: #2b409b;
+
+.buttton-container{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 }
 
+.add-button{
+  background-color: #6675b1;
+  color: #fff;
+  border: none;
+  margin-top:10px;
+  padding: 7.5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button:hover{
+  background-color: #5a679c;
+}
+
+.search-container{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

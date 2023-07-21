@@ -64,7 +64,7 @@ function CandidateList() {
             <th>Name</th>
             <th>Project Title</th>
             <th>Category</th>
-            <th>Actions</th> {/* Add a new column for the "Delete" button */}
+            <th>Action</th> 
           </tr>
         </thead>
         <tbody>
@@ -75,7 +75,7 @@ function CandidateList() {
               <td>{candidate.projectTitle}</td>
               <td>{candidate.category}</td>
               <td>
-                <button onClick={() => deleteCandidate(candidate.id)}>Delete</button>
+                <button className="delete-button" onClick={() => deleteCandidate(candidate.id)}>Delete</button>
               </td>
             </tr>
           ))}

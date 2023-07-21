@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css";
 
 function Navbar1(){
     const path = window.location.pathname;
@@ -16,7 +17,9 @@ function Navbar1(){
         <CustomLink href="/adminpanel">Admin Panel</CustomLink>
         
       </ul>
+      <div className="logout-container">
       <button class="logout-button" onClick={handleLogout}>Logout</button>
+      </div>
     </nav>
   }
   

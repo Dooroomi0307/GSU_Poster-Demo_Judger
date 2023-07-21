@@ -35,16 +35,13 @@
   }
 
   .label{
-    color: #888;
+    color: #5e5e5e;
     font-size: 18px;
     padding: 10px;
   }
 
-
-
-
 .login-btn{
-	background: #555;
+	background: #0056b3;
 	padding: 10px 15px;
 	color: #fff;
 	border-radius: 5px;
@@ -57,17 +54,37 @@
 	opacity: .7;
 }
 
+header {
+  width: 100vw;
+	height: 15vh;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+	background: #0056b3;
+	box-sizing: border-box;
+	top: 0;
+	position: absolute;
+}
+
 .h1{
   color: #FFFFFF;
   font-size: 60px;
-  margin-top: 20px;
-  
- 
+  margin-top: 30px;
+  text-align: center;
+  align-items: center;
 }
+
+.logo{
+  margin-right: 15px;
+  width: 150px;
+  height: auto;
+}
+
 .h2{
-	
 	text-align: center;
-	
+	vertical-align: center;
 	
 }
 
@@ -76,13 +93,6 @@
   margin-top: 10px; 
   text-align: center; } 
 
-  header {
-  width: 100vw;
-	height: 15vh;
-	background: #333;
-	box-sizing: border-box;
-	top: 0;
-	position: absolute;
-  }
+
   
   
